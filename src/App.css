@@ -1,38 +1,50 @@
-.App {
-  text-align: center;
+@import url('https://fonts.googleapis.com/css?family=Inter:wght@200;400;800&display=swap');
+
+:root {
+  --wallet-color: #ff8d02;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+* {
+  margin: 0;
+  padding: 0;
+  color: #f1f1f1;
+  background-color: rgb(30, 30, 30);
+  font-family: 'Inter', sans-serif;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+nav{
+  padding: 20px;
   display: flex;
-  flex-direction: column;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.left-side{
+  flex:20%;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+a{
+  text-decoration: none;
+}
+
+.right-side{
+  flex:80%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 40px;
+}
+
+.connect-wallet{
+  padding: 1em;
+  background-color: var(--wallet-color);
+  border: 0px;
+  border-radius: 10px;
+  font-weight: 400;
+  max-width: fit-content;
+  cursor: pointer;
+}
+
+body{
+  background: rgb(255,141,2);
+  background: linear-gradient(27deg, rgba(255,141,2,1) 0%, rgba(255,141,2,1) 28%, rgba(0,212,255,1) 100%);
 }
