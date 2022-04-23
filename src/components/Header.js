@@ -1,47 +1,45 @@
 import React  from 'react';
+import '../App.css';
 import { useEffect, useState } from "react";
-import { Button } from 'react-bootstrap';
-
 import { connectWallet, getCurrentWalletConnected} from "../utils/wallet.js";
 const Header = (props) => {
 
-    const [walletAddress, setWallet] = useState("");
-    const [status, setStatus] = useState("");
-    function addWalletListener() {
-        if (window.ethereum) {
-          window.ethereum.on("accountsChanged", (accounts) => {
-            if (accounts.length > 0) {
-              setWallet(accounts[0]);
-              setStatus("");
-            } else {
-              setWallet("");
-              setStatus("");
-            }
-          });
+  const [walletAddress, setWallet] = useState("");
+  const [status, setStatus] = useState("");
+
+  function addWalletListener() {
+    if (window.ethereum) {
+      window.ethereum.on("accountsChanged", (accounts) => {
+        if (accounts.length > 0) {
+          setWallet(accounts[0]);
+          setStatus("");
         } else {
-          setStatus(
-            "Metamask is required"
-          );
+          setWallet("");
+          setStatus("");
         }
-      }  
-      useEffect(async () => {
-        const {address, status} = await getCurrentWalletConnected();
-        setWallet(address)
-        setStatus(status);
-        addWalletListener(); 
-      
-      
-
-
-      
-      
-      }, []);
-      
-        const connectWalletPressed = async () => {
-          const walletResponse = await connectWallet();
-          setStatus(walletResponse.status);
-          setWallet(walletResponse.address);
-        };
+      });
+    } else {
+      setStatus(
+        "Metamask is required"
+      );
+    }
+  }  
+  useEffect(() => {
+    const wallet = async () => {
+      return await getCurrentWalletConnected();
+    }
+    const {address, status} = wallet();
+    setWallet(address);
+    setStatus(status);
+    addWalletListener(); 
+    console.log(walletAddress);
+  }, []);
+  
+  const connectWalletPressed = async () => {
+    const walletResponse = await connectWallet();
+    setStatus(walletResponse.status);
+    setWallet(walletResponse.address);
+  };
 
 
   return (
@@ -51,22 +49,20 @@ const Header = (props) => {
           <p>Logo</p>
         </div>
         <div className="right-side">
+        <a href="/mint">Mint Video NFT</a>
         <a href="#">Docs</a>
         <a href="#">About</a>
-        <Button variant="primary" onClick={connectWalletPressed}>
-        {walletAddress.length > 0 ? (
+        <p className='connect-wallet' onClick={connectWalletPressed}>
+        {walletAddress?.length > 0 ? (
           "Connected: " +
           String(walletAddress).substring(0, 6) +
           "..." +
           String(walletAddress).substring(38)
         ) : (
           <span>Connect Wallet</span>
-        )}</Button>
+        )}</p>
         </div>
       </nav>
-      <div className="content">
-            <h1>Stream on-chain with Peer Stream!</h1>
-        </div>
     </div>
   );
 };
