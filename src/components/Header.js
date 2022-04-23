@@ -1,7 +1,7 @@
 import React  from 'react';
 import '../App.css';
 import { useEffect, useState } from "react";
-import { connectWallet, getCurrentWalletConnected} from "../utils/wallet.js";
+import { connectWallet, getCurrentWalletConnected } from "../utils/wallet.js";
 const Header = (props) => {
 
   const [walletAddress, setWallet] = useState("");
