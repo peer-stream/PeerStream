@@ -1,26 +1,13 @@
-const request = require('request');
+const axios = require('axios');
 
 const authorization = async (address, signature) => {
-    const headers = {
-        'content-type': 'application/json'
-    };
-
-    const dataString = `{"address": "${address}", "signature": "${signature}"}`;
-
-    const options = {
-        url: 'https://ethamsterdam.herokuapp.com/auth/token',
-        method: 'POST',
-        headers: headers,
-        body: dataString
-    };
-
-    function callback(error, response, body) {
-        if (!error && response.statusCode === 200) {
-            return response;
-        }
-    }
-
-    return request(options, callback);
+    const auth = await axios
+    .post('https://ethamsterdam.herokuapp.com/auth/token', {
+        address, 
+        signature
+    })
+    console.log(auth.data);
+    return auth.data.token;
 }
 
 export default authorization;

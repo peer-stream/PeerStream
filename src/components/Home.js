@@ -1,7 +1,7 @@
 import React  from 'react';
 import './Home.css'
-import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+// import { useEffect, useState } from "react";
+// import { Link } from "react-router-dom";
 const Home = (props) => {
 
   return (
