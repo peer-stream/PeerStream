@@ -1,5 +1,5 @@
 import React  from 'react';
-import './mint.css'
+import './Mint.css'
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
@@ -38,15 +38,9 @@ const MintPage = (props) => {
             for(let i=1;i<=res.data.nfts.items.length;i++){
            
               tempItems.push(res.data.nfts.items[i]);
-             
-
           axios.get(res.data.nfts.items[i].contentURI).then(resp => {
-           
-            
             var newStr = resp.data.image.replace("ipfs://", "https://ipfs.moralis.io:2053/ipfs/");
             tempImages.push(newStr);
-   
-
           });
 
               }
@@ -67,20 +61,19 @@ const MintPage = (props) => {
 
 
   return (
-    <div>
-    <div className="MintPage">
+    <div className="mint-page">
       <h1>
        LivePeer & Lenst Protocol NFT mint page
       </h1>
       
-      <div>
-      <h2>
-       Lens Protocol Data:
-      </h2>
-      <p>LensProtocol Connection: {pingStatus}</p>
-      <p> Number Of User's Nfts {nftLenght} </p>
-
-
+      <div className=''>
+        <div className='nft-info'>
+          <h2>
+            Lens Protocol Data:
+          </h2>
+          <p>LensProtocol Connection: {pingStatus}</p>
+          <p>Number Of User's Nfts {nftLenght} </p>
+        </div>
         <h4>  All NFT's</h4>
         {nftList.map((object, i) => 
               <div>
@@ -97,44 +90,34 @@ const MintPage = (props) => {
             <p>ercType: {nftList[i].ercType.toString()}</p>
             <p>name: {nftList[i].name.toString()}</p>
             <p>tokenId: {nftList[i].tokenId.toString()}</p>
-
-   
-   
-
-             </div>   
+            </div>   
         )}
 
-     </div>
+      </div>
 
-        <div className='container'>
-      <div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
-      <div class="col">
-        <div class="card mb-6 rounded- shadow-sm">
-          
-          <div class="card-header py-3">
-          <h2>Mint Video NFT</h2>
-        </div>
-          <div class="card-body">
-          <div class="input-group">
-            <input type="text" className="form-control" id="depositInput" placeholder="Name"/>
-           </div> 
-          <div class="input-group">
-            <input type="text" className="form-control" id="depositInput" placeholder="IPFS link"/>
-            </div> 
+        <div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
+          <div class="col">
+            <div class="card mb-6 rounded- shadow-sm">
+              <div class="card-header py-3">
+                <h2>Mint Video NFT</h2>
+              </div>
+              <div class="card-body">
+                <div class="input-group">
+                  <input type="text" className="form-control" id="depositInput" placeholder="Name"/>
+                </div> 
               <div class="input-group">
-            <button type="submit"   className="btn btn-primary">Mint</button>
-          </div>      
+                <input type="text" className="form-control" id="depositInput" placeholder="IPFS link"/>
+              </div> 
+              <div class="input-group">
+                <button type="submit"   className="btn btn-primary">Mint</button>
+              </div>      
+            </div>
           </div>
         </div>
-      </div>  
-      </div>
-        <div>
-
+      <div>
     </div>
-
-    </div>
-      </div>
-      </div>
+  </div>
+</div>
     );
 };
 

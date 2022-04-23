@@ -1,0 +1,18 @@
+.mint-page{
+    padding: 20px;
+    width: 80%;
+    margin: auto;
+}
+
+h1{
+    font-weight: 600;
+    font-size: 2.5em;
+}
+
+.nft-info{
+    background-color: rgb(30, 30, 30);
+    border: 0px solid;
+    border-radius: 20px;
+    padding: 20px;
+    margin: 20px 0px;
+}

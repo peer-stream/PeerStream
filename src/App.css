@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=Inter:wght@200;400;800&display=swap');
 
 :root {
-  --wallet-color: #ff8d02;
+  --wallet-color: #5B7ACD;
 }
 
 * {
@@ -12,13 +12,16 @@
 }
 
 body{
-  background-color: rgb(30, 30, 30);
+  background-color: rgb(35, 35, 35);
+
 }
 
 nav{
   padding: 20px;
   display: flex;
   align-items: center;
+  background-color: rgb(30, 30, 30);
+
 }
 
 .left-side{
@@ -47,8 +50,12 @@ a{
   cursor: pointer;
 }
 
-div.content{
-  height: 1;
-  background: linear-gradient(27deg, rgba(30,30,30,1) 0%, rgba(38,42,42,1) 39%, rgba(0,212,255,1) 100%);
+.border-gradient {
+  border-bottom: 10px solid;
+  border-image-slice: 1;
+  border-width: 5px;
 }
 
+.border-gradient-purple {
+  border-image-source: linear-gradient(to right, #743ad5, #3aa6d5);
+}
