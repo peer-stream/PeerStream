@@ -8,7 +8,7 @@
   margin: 0;
   padding: 0;
   color: #f1f1f1;
-  background-color: rgb(30, 30, 30);
+  background: rgb(30, 30, 30);
   font-family: 'Inter', sans-serif;
 }
 
@@ -44,7 +44,12 @@ a{
   cursor: pointer;
 }
 
-body{
-  background: rgb(255,141,2);
-  background: linear-gradient(27deg, rgba(255,141,2,1) 0%, rgba(255,141,2,1) 28%, rgba(0,212,255,1) 100%);
+div.content{
+  height: 1;
+  background: linear-gradient(27deg, rgba(30,30,30,1) 0%, rgba(38,42,42,1) 39%, rgba(0,212,255,1) 100%);
+}
+
+h1{
+  width: 20%;
+  float: right;
 }

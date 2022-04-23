@@ -4,6 +4,7 @@ import Web3 from "web3";
 import Web3Modal from "web3modal";
 import WalletConnectProvider from "@walletconnect/web3-provider";
 import 'dotenv/config';
+import { toHex, truncateAddress } from "./utils";
 const infuraID = process.env.REACT_APP_INFURA_ID;
 
 const INITIAL_STATE = {
@@ -29,73 +30,178 @@ const providerOptions = {
   }
 };
 
+const web3Modal = new Web3Modal({
+  cacheProvider: true, // optional
+  providerOptions // required
+});
+
 
 const App = () => {
+  const [provider, setProvider] = useState();
+  const [library, setLibrary] = useState();
+  const [account, setAccount] = useState();
+  const [signature, setSignature] = useState("");
+  const [error, setError] = useState("");
+  const [chainId, setChainId] = useState();
+  const [network, setNetwork] = useState();
+  const [message, setMessage] = useState("");
+  const [signedMessage, setSignedMessage] = useState("");
+  const [verified, setVerified] = useState();
 
-  const [account, setAccount] = useState('');
-  const [state, setState] = useState();
-  const [web3Modal, setWeb3Modal] = useState();
-
-  const connectWallet = async () => { 
-    try{
-      const web3Modal = new Web3Modal({
-        // network: "mainnet", // optional
-        cacheProvider: false, // optional
-        providerOptions // required
-      });
-      
+  const connectWallet = async () => {
+    try {
       const provider = await web3Modal.connect();
-      setState(provider);
-      const web3 = new Web3(provider);
-      setWeb3Modal(web3);
-      const accounts = await web3.eth.getAccounts();
-
-      setAccount(accounts[0]);
-    } catch(error) {
-      if(error === 4001){
-        resetApp();
-      } else {
-        throw error;
-      }
+      const library = new Web3(provider);
+      const accounts = await library.listAccounts();
+      const network = await library.getNetwork();
+      setProvider(provider);
+      setLibrary(library);
+      if (accounts) setAccount(accounts[0]);
+      setChainId(network.chainId);
+    } catch (error) {
+      setError(error);
     }
-  }
-
-  const resetApp = async (error) => {
-    console.log(error);
-    console.log('disconnect')
-    const { web3 } = state;
-    if (web3 && web3.currentProvider && web3.currentProvider.close) {
-      await web3.currentProvider.close();
-    }
-    await web3Modal.clearCachedProvider();
-    setState({ ...INITIAL_STATE });
-    setAccount('');
   };
 
-  const subscribe = () => {
-    if (!window.ethereum.on) {
-      return;
-    }
-    window.ethereum.on("disconnect", (error) => resetApp(error));
-    window.ethereum.on("accountsChanged", async (accounts) => {
-      setState({ address: accounts[0] });
-      setAccount( accounts[0] );
-    });
-    window.ethereum.on("chainChanged", async (chainId) => {
-      const { web3 } = state;
-      const networkId = web3.eth.net.getId();
-      setState({ chainId, networkId });
-    });
+  const handleNetwork = (e) => {
+    const id = e.target.value;
+    setNetwork(Number(id));
+  };
 
-    // Subscribe to provider connection
-    window.ethereum.on("connect", (info) => {
-      console.log(info);
-    });
-  }
-  
+  const handleInput = (e) => {
+    const msg = e.target.value;
+    setMessage(msg);
+  };
+
+  // const switchNetwork = async () => {
+  //   try {
+  //     await library.provider.request({
+  //       method: "wallet_switchEthereumChain",
+  //       params: [{ chainId: toHex(network) }]
+  //     });
+  //   } catch (switchError) {
+  //     if (switchError.code === 4902) {
+  //       try {
+  //         await library.provider.request({
+  //           method: "wallet_addEthereumChain",
+  //           params: [networkParams[toHex(network)]]
+  //         });
+  //       } catch (error) {
+  //         setError(error);
+  //       }
+  //     }
+  //   }
+  // };
+
+  const refreshState = () => {
+    setAccount();
+    setChainId();
+    setNetwork("");
+    setMessage("");
+    setSignature("");
+    setVerified(undefined);
+  };
+
+  const disconnect = async () => {
+    web3Modal.clearCachedProvider();
+    refreshState();
+  };
+
   useEffect(() => {
-    subscribe();
-  });
+    if (web3Modal.cachedProvider) {
+      connectWallet();
+    }
+  }, []);
+
+  useEffect(() => {
+    if (provider?.on) {
+      const handleAccountsChanged = (accounts) => {
+        console.log("accountsChanged", accounts);
+        if (accounts) setAccount(accounts[0]);
+      };
+
+      const handleChainChanged = (_hexChainId) => {
+        setChainId(_hexChainId);
+      };
+
+      const handleDisconnect = () => {
+        console.log("disconnect", error);
+        disconnect();
+      };
+
+      provider.on("accountsChanged", handleAccountsChanged);
+      provider.on("chainChanged", handleChainChanged);
+      provider.on("disconnect", handleDisconnect);
+
+      return () => {
+        if (provider.removeListener) {
+          provider.removeListener("accountsChanged", handleAccountsChanged);
+          provider.removeListener("chainChanged", handleChainChanged);
+          provider.removeListener("disconnect", handleDisconnect);
+        }
+      };
+    }
+  }, [provider]);
+
+
+  // // const [web3Modal, setWeb3Modal] = useState();
+
+  // const connectWallet = async () => { 
+  //   try {
+  //     const provider = await web3Modal.connect();
+  //     const library = new Web3(provider);
+  //     const accounts = await library.listAccounts();
+  //     const network = await library.getNetwork();
+  //     setProvider(provider);
+  //     setLibrary(library);
+  //     if (accounts) setAccount(accounts[0]);
+  //     setChainId(network.chainId);
+  //   } catch (error) {
+  //     setError(error);
+  //   }
+  // };
+
+  // // }
+
+  // // const resetApp = async (error) => {
+  // //   console.log(error);
+  // //   console.log('disconnect')
+  // //   const { web3 } = state;
+  // //   if (web3 && web3.currentProvider && web3.currentProvider.close) {
+  // //     await web3.currentProvider.close();
+  // //   }
+  // //   await web3Modal.clearCachedProvider();
+  // //   setState({ ...INITIAL_STATE });
+  // //   setAccount('');
+  // // };
+
+  // // const subscribe = async () => {
+  // //   if (!window.ethereum.on) {
+  // //     return;
+  // //   }
+  // //   window.ethereum.on("disconnect", async (error) => resetApp(error));
+  // //   window.ethereum.on("chainChanged", async (chainId) => {
+  // //     const { web3 } = state;
+  // //     const networkId = await web3.eth.net.getId();
+  // //     setState({ chainId, networkId });
+  // //   });
+
+  // //   // Subscribe to provider connection
+  // //   window.ethereum.on("connect", async (info) => {
+  // //     console.log(state);
+  // //     const { web3 } = state;
+  // //     const accounts = await web3.eth.accounts();
+  // //     setState({ address: accounts[0] });
+  // //     setAccount( accounts[0] );
+  // //   });
+  // // }
+  
+  // useEffect(() => {
+  //   const f = async() => {
+  //   await connectWallet();}
+  //   f();
+  //   // subscribe();
+  // }, []);
 
   return (
     <div>
@@ -106,11 +212,11 @@ const App = () => {
         <div className="right-side">
         <a href="#">Docs</a>
         <a href="#">About</a>
-          <p onClick={connectWallet} className="connect-wallet">{ account==='' ? 'Connect Wallet' : account}</p>
+          <p onClick={connectWallet} className="connect-wallet">{ account===null ? 'Connect Wallet' : account}</p>
         </div>
       </nav>
       <div className="content">
-            <p>content here</p>
+            <h1>Stream on-chain with Peer Stream!</h1>
         </div>
     </div>
   )
