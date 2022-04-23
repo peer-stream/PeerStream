@@ -15,8 +15,8 @@ const MintPage = (props) => {
     const contract = "0x54439D4908A3E19356F876aa6022D67d0b3B12d6";
 
     useEffect( () => {
-        //const {address, status} =  getCurrentWalletConnected();
-        // setWallet(address)
+    getCurrentWalletConnected().then(res => setWallet(res.address));
+
 
 
         ping().then(res => setpingStatus(res.data.ping=="pong"?"True":"False"));
