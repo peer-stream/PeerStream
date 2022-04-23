@@ -57,7 +57,9 @@ const MintPage = (props) => {
       </h1>
       
       <div>
-          
+      <h2>
+       Lens Protocol Data:
+      </h2>
       <p>LensProtocol Connection: {pingStatus}</p>
       <p> Number Of User's Nfts {nftLenght} </p>
 
