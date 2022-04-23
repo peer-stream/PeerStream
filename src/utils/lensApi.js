@@ -1,15 +1,15 @@
-import { urqlClient } from './urql-client';
 
-const pingQuery = `
-  query {
-    ping
-  }
-`
+import { apolloClient
+    
+} from './apolloClient';
+import { gql } from '@apollo/client'
 
-export const queryExample = async () => {
-  const response = await urqlClient.query(pingQuery).toPromise();
-  console.log('Lens example data: ', response)
-}
+import { createClient } from 'urql'
+
+const APIURL = 'https://api-mumbai.lens.dev/';
+
+
+   
 
 const GET_PING = `
   query {
@@ -17,17 +17,12 @@ const GET_PING = `
   }
 `
 
-export const ping = () => {
-   return apolloClient.query({
+export const ping = async() => {
+   return await apolloClient.query({
     query: gql(GET_PING),
-  })
+  });
 }
-
-import { apolloClient } from './apollo-client';
-// this is showing you how you use it with react for example
-// if your using node or something else you can import using
-// @apollo/client/core!
-import { gql } from '@apollo/client'
+   
 
 const GET_USERS_NFTS = `
   query($request: NFTsRequest!) {
@@ -61,7 +56,7 @@ const GET_USERS_NFTS = `
 }
 `
 
-export const getUsersNfts = (ownerAddress, contractAddress, chainIds) => {
+export const getUsersNfts = async(ownerAddress, contractAddress, chainIds) => {
    return apolloClient.query({
     query: gql(GET_USERS_NFTS),
     variables: {
