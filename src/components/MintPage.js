@@ -54,7 +54,9 @@ const MintPage = (props) => {
       <h1>
        LivePeer & Lenst Protocol NFT mint page
       </h1>
+      
       <div>
+          
       <p>LensProtocol Connection: {pingStatus}</p>
       <p> Number Of User's Nfts {nftLenght} </p>
 
