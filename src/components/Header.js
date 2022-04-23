@@ -30,21 +30,25 @@ const Header = (props) => {
       return await getCurrentWalletConnected();
     }
     const authorize = async () => {
-      const {token} = await authorizeWallet(address);
+      const {token} = await authorizeWallet(walletAddress);
+      console.log(token);
       setAuthToCache(token);
     }
     const {address, status} = wallet();
     setWallet(address);
     setStatus(status);
-    authorize();
     addWalletListener(); 
     console.log(walletAddress);
+    // authorize();
   }, []);
   
   const connectWalletPressed = async () => {
     const walletResponse = await connectWallet();
     setStatus(walletResponse.status);
     setWallet(walletResponse.address);
+    const {token} = await authorizeWallet(walletAddress);
+    console.log(token);
+    setAuthToCache(token);
   };
 
 
@@ -58,7 +62,7 @@ const Header = (props) => {
         <a href="/mint">Mint Video NFT</a>
         <a href="#">Docs</a>
         <a href="#">About</a>
-        <p className='connect-wallet' onClick={connectWalletPressed}>
+        <p className='connect-wallet' onClick={async () => await connectWalletPressed}>
         {walletAddress?.length > 0 ? (
           "Connected: " +
           String(walletAddress).substring(0, 6) +
