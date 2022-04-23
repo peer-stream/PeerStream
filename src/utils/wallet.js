@@ -1,11 +1,38 @@
 import React  from 'react';
+import { ethers } from 'ethers';
+import authorization from '../requests/authentication/authorization';
+import createNonce from '../requests/authentication/createNonce';
+import createStream from '../requests/authentication/createStream';
 
 require('dotenv').config();
 
-const  Web3  =  require('web3');
-
-
-  
+export const authorizeWallet = async (address) => {
+  if(window.ethereum){
+    try{
+      const nonce = createNonce(address);
+      const { message_to_sign } = nonce;
+      await window.ethereum.send('eth_requestAccounts');
+      const provider = new ethers.providers.Web3Provider(window.ethereum);
+      const signer = provider.getSigner()
+      const signature = await signer.signMessage(message_to_sign);
+      const token = await authorization(address, signature);
+      return {
+        token,
+        status: 'Authentication successful'
+      };
+    } catch(err){
+      return {
+        token: '',
+        status: 'Authentication error: ' + error
+      }
+    }
+  } else {
+      return {
+        token: '',
+        status: "Metamask is required"
+      };
+    }
+}
 
 export const connectWallet = async () => {
     if (window.ethereum) {
