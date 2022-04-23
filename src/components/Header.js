@@ -46,22 +46,15 @@ const Header = (props) => {
     setStatus(walletResponse.status);
     setWallet(walletResponse.address);
     const {token} = await authorizeWallet(walletAddress);
-    // setAuthToCache(token);
-    const authCache=getAuthCache()
-    const data=authCache.data
-    const item={
-      auth:'Bearer ' + token
-    }
-    data['Bearer']=item
-    localStorage.setItem("AUTH_CACHE",JSON.stringify(authCache))
+    setAuthToCache(token);
   };
 
 
   return (
-    <div className="Header">
+    <div className="border-gradient border-gradient-purple">
       <nav>
         <div className="left-side">
-          <p>Logo</p>
+          <img className='logo' src='/peer_stream.png' alt="Peer Stream logo" />
         </div>
         <div className="right-side">
         <a href="/mint">Mint Video NFT</a>
