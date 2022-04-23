@@ -1,18 +1,11 @@
 import React  from 'react';
 import { useEffect, useState } from "react";
-import { connectWallet, getCurrentWalletConnected, getBitciBalance} from "../utils/wallet.js";
-import { Link } from "react-router-dom";
-import Container from 'react-bootstrap/Container';
-import Navbar from 'react-bootstrap/Navbar';
-import Nav from 'react-bootstrap/Nav';
-import Button from 'react-bootstrap/Button';
 
+import { connectWallet} from "../utils/wallet.js"; 
 const Header = (props) => {
 
+    
 
-
-    }
-  }
 
 
 useEffect(async () => {
