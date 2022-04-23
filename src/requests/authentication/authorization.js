@@ -15,7 +15,7 @@ const authorization = async (address, signature) => {
     };
 
     function callback(error, response, body) {
-        if (!error && response.statusCode == 200) {
+        if (!error && response.statusCode === 200) {
             return response;
         }
     }

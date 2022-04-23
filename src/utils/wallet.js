@@ -7,8 +7,10 @@ require('dotenv').config();
 export const authorizeWallet = async (address) => {
   if(window.ethereum){
     try{
-      const nonce = createNonce(address);
+      const nonce = await createNonce(address);
+      console.log(nonce);
       const { message_to_sign } = nonce;
+      console.log(message_to_sign);
       await window.ethereum.send('eth_requestAccounts');
       const provider = new ethers.providers.Web3Provider(window.ethereum);
       const signer = provider.getSigner()

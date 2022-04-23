@@ -15,7 +15,7 @@ const createStream = async (title, description) => {
     };
 
     function callback(error, response, body) {
-        if (!error && response.statusCode == 200) {
+        if (!error && response.statusCode === 200) {
             return response;
         }
     }

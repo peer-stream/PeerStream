@@ -14,10 +14,10 @@ const createNonce = async (address) => {
         body: dataString
     };
 
-    function callback(error, response, body) {
-        console.log(error, response, body);
-        if (!error && response.statusCode == 200) {
-            return response;
+    async function callback(error, response, body) {
+        console.log(JSON.parse(body))
+        if (!error && response.statusCode === 200) {
+            return await JSON.parse(body);
         }
     }
 
