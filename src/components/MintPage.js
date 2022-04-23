@@ -1,5 +1,5 @@
 import React  from 'react';
-import './Home.css'
+import './mint.css'
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
@@ -50,6 +50,7 @@ const MintPage = (props) => {
 
 
   return (
+    <div>
     <div className="MintPage">
       <h1>
        LivePeer & Lenst Protocol NFT mint page
@@ -71,7 +72,13 @@ const MintPage = (props) => {
              </div>   
         )}
 
+        <h2>Mint Video NFT</h2>
+        <div>
+
     </div>
+
+    </div>
+      </div>
       </div>
     );
 };
