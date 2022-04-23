@@ -25,3 +25,4 @@ yarn-error.log*
 # api keys
 .env
 package-lock.json
+.eslintcache
