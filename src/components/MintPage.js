@@ -13,6 +13,8 @@ const MintPage = (props) => {
 
     const [walletAddress, setWallet] = useState("");
     const contract = "0x54439D4908A3E19356F876aa6022D67d0b3B12d6";
+    const [nftList, setNnftList] = useState([]);
+    const [nftLenght, setNftLenght] = useState(0);
 
     useEffect( () => {
     getCurrentWalletConnected().then(res => setWallet(res.address));
@@ -21,7 +23,28 @@ const MintPage = (props) => {
 
         ping().then(res => setpingStatus(res.data.ping=="pong"?"True":"False"));
    
-        getUsersNfts(walletAddress,contract,[80001]).then(res => console.log(res.data));
+        if(walletAddress){
+
+            getUsersNfts(walletAddress,contract,[80001]).then((res) =>{
+           if(res.data.nfts){
+            setNftLenght(res.data.nfts.length);
+            let tempItems= [];
+                
+            for(let i=1;i<=res.data.nfts.items.length;i++){
+           
+              tempItems.push(res.data.nfts.items[i]);
+              }
+          
+              setNnftList(tempItems);
+           }
+           else{
+            setNftLenght(0);
+           }
+    }
+   
+
+             );
+        }
    
       });
 
@@ -33,10 +56,23 @@ const MintPage = (props) => {
       </h1>
       <div>
       <p>LensProtocol Connection: {pingStatus}</p>
-      </div>
+      <p> Number Of User's Nfts {nftLenght} </p>
+
+
+        <h4>  All NFT's</h4>
+        {nftList.map((object, i) => 
+              <div>
+            <img src={object}/>
+            <p>NFT ID: #{i+1}</p>
+   
+
+             </div>   
+        )}
 
     </div>
-  );
+      </div>
+    );
 };
+
 
 export default MintPage;
