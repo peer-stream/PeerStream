@@ -12,7 +12,7 @@ const MintPage = (props) => {
     const [pingStatus, setpingStatus] = useState("Waiting....");
 
     const [walletAddress, setWallet] = useState("");
-    const contract = "0x54439D4908A3E19356F876aa6022D67d0b3B12d6";
+    const contract = "0xA4E1d8FE768d471B048F9d73ff90ED8fcCC03643";
     const [nftList, setNnftList] = useState([]);
     const [nftLenght, setNftLenght] = useState(0);
 
@@ -26,6 +26,7 @@ const MintPage = (props) => {
         if(walletAddress){
 
             getUsersNfts(walletAddress,contract,[80001]).then((res) =>{
+              console.log(res.data);
            if(res.data.nfts){
             setNftLenght(res.data.nfts.length);
             let tempItems= [];
@@ -34,7 +35,6 @@ const MintPage = (props) => {
            
               tempItems.push(res.data.nfts.items[i]);
               }
-          
               setNnftList(tempItems);
            }
            else{
