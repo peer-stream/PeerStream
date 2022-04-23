@@ -15,6 +15,7 @@ const createNonce = async (address) => {
     };
 
     function callback(error, response, body) {
+        console.log(error, response, body);
         if (!error && response.statusCode == 200) {
             return response;
         }
