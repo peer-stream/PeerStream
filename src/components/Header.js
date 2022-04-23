@@ -1,7 +1,8 @@
 import React  from 'react';
 import '../App.css';
 import { useEffect, useState } from "react";
-import { connectWallet, getCurrentWalletConnected } from "../utils/wallet.js";
+import { connectWallet, getCurrentWalletConnected, authorizeWallet } from "../utils/wallet.js";
+import { setAuthToCache } from '../utils/cacheAuth';
 const Header = (props) => {
 
   const [walletAddress, setWallet] = useState("");
@@ -28,9 +29,14 @@ const Header = (props) => {
     const wallet = async () => {
       return await getCurrentWalletConnected();
     }
+    const authorize = async () => {
+      const {token} = await authorizeWallet(address);
+      setAuthToCache(token);
+    }
     const {address, status} = wallet();
     setWallet(address);
     setStatus(status);
+    authorize();
     addWalletListener(); 
     console.log(walletAddress);
   }, []);
