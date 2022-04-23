@@ -72,7 +72,30 @@ const MintPage = (props) => {
              </div>   
         )}
 
-        <h2>Mint Video NFT</h2>
+     </div>
+
+        <div className='container'>
+      <div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
+      <div class="col">
+        <div class="card mb-6 rounded- shadow-sm">
+          
+          <div class="card-header py-3">
+          <h2>Mint Video NFT</h2>
+        </div>
+          <div class="card-body">
+          <div class="input-group">
+            <input type="text" className="form-control" id="depositInput" placeholder="Name"/>
+           </div> 
+          <div class="input-group">
+            <input type="text" className="form-control" id="depositInput" placeholder="IPFS link"/>
+            </div> 
+              <div class="input-group">
+            <button type="submit"   className="btn btn-primary">Mint</button>
+          </div>      
+          </div>
+        </div>
+      </div>  
+      </div>
         <div>
 
     </div>

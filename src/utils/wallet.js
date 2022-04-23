@@ -23,7 +23,7 @@ export const authorizeWallet = async (address) => {
     } catch(err){
       return {
         token: '',
-        status: 'Authentication error: ' + error
+        status: 'Authentication error: ' + err
       }
     }
   } else {
