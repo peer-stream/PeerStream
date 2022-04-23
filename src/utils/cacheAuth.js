@@ -27,7 +27,6 @@ const getAuthCache=()=>{
 }
 
 const setAuthToCache=(token)=>{
-
     const authCache=getAuthCache()
     const data=authCache.data
 

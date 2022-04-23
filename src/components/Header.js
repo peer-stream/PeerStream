@@ -2,7 +2,8 @@ import React  from 'react';
 import '../App.css';
 import { useEffect, useState } from "react";
 import { connectWallet, getCurrentWalletConnected, authorizeWallet } from "../utils/wallet.js";
-import { setAuthToCache } from '../utils/cacheAuth';
+import { setAuthToCache, getAuthCache } from '../utils/cacheAuth';
+
 const Header = (props) => {
 
   const [walletAddress, setWallet] = useState("");
@@ -31,15 +32,13 @@ const Header = (props) => {
     }
     const authorize = async () => {
       const {token} = await authorizeWallet(walletAddress);
-      console.log(token);
       setAuthToCache(token);
     }
-    const {address, status} = wallet();
+    const {address, status} = wallet().catch(error => console.error);
     setWallet(address);
     setStatus(status);
     addWalletListener(); 
-    console.log(walletAddress);
-    // authorize();
+    authorize();
   }, []);
   
   const connectWalletPressed = async () => {
@@ -47,8 +46,14 @@ const Header = (props) => {
     setStatus(walletResponse.status);
     setWallet(walletResponse.address);
     const {token} = await authorizeWallet(walletAddress);
-    console.log(token);
-    setAuthToCache(token);
+    // setAuthToCache(token);
+    const authCache=getAuthCache()
+    const data=authCache.data
+    const item={
+      auth:'Bearer ' + token
+    }
+    data['Bearer']=item
+    localStorage.setItem("AUTH_CACHE",JSON.stringify(authCache))
   };
 
 
@@ -60,9 +65,9 @@ const Header = (props) => {
         </div>
         <div className="right-side">
         <a href="/mint">Mint Video NFT</a>
-        <a href="#">Docs</a>
-        <a href="#">About</a>
-        <p className='connect-wallet' onClick={async () => await connectWalletPressed}>
+        {/* <a href="#">Docs</a>
+        <a href="#">About</a> */}
+        <p className='connect-wallet' onClick={ ()=>connectWalletPressed() }>
         {walletAddress?.length > 0 ? (
           "Connected: " +
           String(walletAddress).substring(0, 6) +
