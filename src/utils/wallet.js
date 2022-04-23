@@ -1,8 +1,6 @@
-import React  from 'react';
 import { ethers } from 'ethers';
 import authorization from '../requests/authentication/authorization';
 import createNonce from '../requests/authentication/createNonce';
-import createStream from '../requests/authentication/createStream';
 
 require('dotenv').config();
 
