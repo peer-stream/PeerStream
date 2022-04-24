@@ -109,30 +109,24 @@ try {
             ):<p></p>}
         </div>
       </div>
-
-        <div>
           <div>
-            <div>
-              <div>
-                <h2>Mint Video NFT</h2>
-              </div>
-              <div >
-                <div>
-                  <input type="text" className="form-control" id="depositInput" placeholder="Name"/>
-                </div> 
-              <div>
-                <input type="text" className="form-control" id="depositInput" placeholder="IPFS link"/>
-              </div> 
-              <div>
-                <button type="submit"   className="btn btn-primary">Mint</button>
-              </div>      
-            </div>
+            <h2>Mint Video NFT</h2>
           </div>
+      <div className='nft-info'>
+          <div >
+            <div>
+              <input type="text" className="form-control" id="depositInput" placeholder="Name"/>
+            </div> 
+          <div>
+            <input type="text" className="form-control" id="depositInput" placeholder="IPFS link"/>
+          </div> 
+          <div>
+            <button type="submit" className="btn btn-primary">Mint</button>
+          </div>      
         </div>
-      <div>
-    </div>
-  </div>
-</div>
+      </div>
+      </div>
+
     );
 };
 
