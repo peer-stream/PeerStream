@@ -2,7 +2,7 @@ import React  from 'react';
 
 import Header from './components/Header';
 import Home from './components/Home';
-import Streams from './components/Streams'
+import StreamList from './components/StreamList';
 
 import {
   BrowserRouter as Router,
@@ -19,7 +19,7 @@ function App() {
         <Header/>   
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/streams" element={<Streams/>}/>
+          <Route path="/streams" element={<StreamList/>}/>
           <Route path="/mint" element={<MintPage/>}/>
         </Routes>
       </Router>
