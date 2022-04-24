@@ -33,11 +33,11 @@ const MintPage = (props) => {
         ping().then(res => setpingStatus(res.data.ping=="pong"?"True":"False"));
    
 try {
-  if(web3.accoun && nftLenght==0){
+  if(web3.account && nftLenght==0){
     console.log("wallet adress");
-    console.log(web3.accoun)
+    console.log(web3.account)
 
-      getUsersNfts(web3.accoun,contract,[80001]).then((res) =>{
+      getUsersNfts(web3.account,contract,[80001]).then((res) =>{
   
      if(res.data.nfts){
       setNftLenght(res.data.nfts.length);
