@@ -1,24 +1,29 @@
-import React  from 'react';
+import React from 'react';
+import axios from 'axios';
 import './mint.css'
 import { useEffect, useState } from "react";
+
+import { useWeb3 } from '../utils/web3ModalContext';
 import { ping,getUsersNfts} from "../utils/lensApi";
-import { getCurrentWalletConnected} from "../utils/wallet";
 
 import '../utils/lensApi.js';
-const MintPage = (props) => {
 
+const MintPage = (props) => {
+    const web3 = useWeb3();
     const [pingStatus, setpingStatus] = useState("Waiting....");
 
-    const [walletAddress, setWallet] = useState("");
     const contract = "0xA4E1d8FE768d471B048F9d73ff90ED8fcCC03643";
     const [nftList, setNnftList] = useState([]);
     const [nftLenght, setNftLenght] = useState(0);
     const [imgList, setImgsList] = useState([]);
-    
-    const axios = require('axios');
 
-    useEffect( () => {
-    getCurrentWalletConnected().then(res => setWallet(res.address));
+    const connectToWallet = async () => {
+      await web3.connect();
+      // web3.account -> wallet address
+    }
+
+    useEffect(() => {
+      connectToWallet();
         ping().then(res => setpingStatus(res.data.ping=="pong"?"True":"False"));
    
 try {
