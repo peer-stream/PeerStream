@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import axios from 'axios'
 import { useWeb3 } from '../utils/web3ModalContext';
 import '../App.css';
+import { Link } from 'react-router-dom';
 
 const Header = (props) => {
   const web3 = useWeb3();
@@ -61,10 +62,10 @@ const Header = (props) => {
     <div className="border-gradient border-gradient-purple">
       <nav>
         <div className="left-side">
-          <img className='logo' src='/peer_stream.png' alt="Peer Stream logo" />
+          <Link to="/"><img className='logo' src='/peer_stream.png' alt="Peer Stream logo" /></Link>
         </div>
         <div className="right-side">
-        <a href="/mint">Mint Video NFT</a>
+        <Link className='link' to="/mint">Mint Video NFT</Link>
         <p className='connect-wallet' onClick={connectToWallet}>
           {connected ? (
             "Connected: " +
