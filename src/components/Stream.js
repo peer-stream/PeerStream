@@ -1,11 +1,10 @@
-import React from "react";
 /**
  * donation
  * comment
  * 
  */
 
-const Stream (props) => {
+const Stream = (props) => {
     return (
         <div>
         </div>)
