@@ -1,9 +1,9 @@
 import axios from 'axios';
 
 
-export const getStreams = async(id) => {
+export const getStreams = async() => {
     let resp;
-    url = "https://ethamsterdam.herokuapp.com/streams/";
+    let url = "https://ethamsterdam.herokuapp.com/streams/";
     axios.get(url).then(tresp => {
         console.log(tresp);
       
