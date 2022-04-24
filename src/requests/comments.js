@@ -3,7 +3,7 @@ import axios from 'axios';
 
 export const getComments = async(id) => {
     let resp;
-    url = "https://ethamsterdam.herokuapp.com/streams/"+id+"/comments";
+    const url = "https://ethamsterdam.herokuapp.com/streams/"+id+"/comments";
     axios.get(url).then(tresp => {
         console.log(tresp);
       
@@ -13,16 +13,13 @@ export const getComments = async(id) => {
   return resp;
 }
    
-
-
-
 export const postComment = async(id,message,token) => {
     let resp;
-    url = "https://ethamsterdam.herokuapp.com/streams/"+id+"/comments";
-    header= "Authorization: Bearer"+token;
+    const url = "https://ethamsterdam.herokuapp.com/streams/"+id+"/comments";
+    const header= "Authorization: Bearer"+token;
     axios({
         method: 'post',
-        url: '/login',
+        url,
         data: {
             body: message
         
