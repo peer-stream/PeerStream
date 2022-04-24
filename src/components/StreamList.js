@@ -34,3 +34,5 @@ const StreamList = (props) => {
         </div>)
 }
 
+export default StreamList;
+
