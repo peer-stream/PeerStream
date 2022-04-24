@@ -31,7 +31,6 @@ const StreamList = (props) => {
   
   return (
       <div>
-        { data.map((d) => <p>{d}</p>) }
       </div>)
 }
 
