@@ -102,7 +102,7 @@ try {
           {nftList.length>0?
           nftList.map((object, i) => 
               <div className='nft-container'>
-                <img src='/livepeer.png'/>
+                <img src='/livepeer.png' alt='live-peer'/>
                 <div className='nft-inner-content'>
                   <h3>NFT ID: #{i+1}</h3>
                   <p>Name: {nftList[i].name.toString()}</p>
