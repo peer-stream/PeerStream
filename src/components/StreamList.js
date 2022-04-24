@@ -4,6 +4,7 @@
  */
  import { useWeb3 } from '../utils/web3ModalContext';
  import { useEffect } from 'react';
+ import {getStreams} from "../utils/streams";
 const StreamList = (props) => {
     const web3 = useWeb3();
 
@@ -21,6 +22,7 @@ const StreamList = (props) => {
 
       }
       connectToWallet();
+      console.log(getStreams());
 
 
       });
@@ -32,4 +34,3 @@ const StreamList = (props) => {
         </div>)
 }
 
-export default StreamList;
