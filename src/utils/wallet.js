@@ -9,7 +9,7 @@ export const authorizeWallet = async (address) => {
     try{
       const message_to_sign = await createNonce(address);
       console.log('message', message_to_sign);
-      await window.ethereum.send('eth_requestAccounts');
+      // await window.ethereum.send('eth_requestAccounts');
       const provider = new ethers.providers.Web3Provider(window.ethereum);
       const signer = provider.getSigner()
       const signature = await signer.signMessage(message_to_sign);
@@ -87,5 +87,3 @@ export const connectWallet = async () => {
       };
     }
   };
-
-  
