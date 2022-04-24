@@ -16,10 +16,10 @@ const StreamCreation = (props) => {
         }
         connectToWallet();
     });
-    
+
     return (
         <div>
-            
+            <button>Create</button>
         </div>)
 }
 
