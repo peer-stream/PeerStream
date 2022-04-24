@@ -1,6 +1,6 @@
 import React  from 'react';
-import Web3 from "web3";
-import Web3Modal from "web3modal";
+
+import { Web3Provider } from './utils/web3ModalContext';
 
 import Header from './components/Header';
 import Home from './components/Home';
@@ -16,14 +16,16 @@ import MintPage from './components/MintPage';
 function App() {
   return (
     <div>
-      <Router>
-        <Header/>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/streams" element={<Streams/>}/>
-          <Route path="/mint" element={<MintPage/>}/>
-        </Routes>
-      </Router>
+      <Web3Provider>
+        <Router>
+          <Header/>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/streams" element={<Streams/>}/>
+            <Route path="/mint" element={<MintPage/>}/>
+          </Routes>
+        </Router>
+      </Web3Provider>
     </div>
   );
 }
