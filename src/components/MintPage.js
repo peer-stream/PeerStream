@@ -1,7 +1,6 @@
 import React  from 'react';
 import './mint.css'
 import { useEffect, useState } from "react";
-
 import { ping,getUsersNfts} from "../utils/lensApi";
 import { getCurrentWalletConnected} from "../utils/wallet";
 
@@ -20,9 +19,6 @@ const MintPage = (props) => {
 
     useEffect( () => {
     getCurrentWalletConnected().then(res => setWallet(res.address));
-
-
-
         ping().then(res => setpingStatus(res.data.ping=="pong"?"True":"False"));
    
 try {
@@ -90,26 +86,28 @@ try {
           <p>LensProtocol Connection: {pingStatus}</p>
           <p>Number Of User's Nfts {nftLenght} </p>
         </div>
-        <h4>  All NFT's</h4>
-        {nftList.length>0?
-        nftList.map((object, i) => 
-              <div>
-            <img src={nftList[i]}/>
-            <p>NFT ID: #{i+1}</p>
-          
-            <p>Name: {nftList[i].name.toString()}</p>
-            <p>collectionName: {nftList[i].collectionName.toString()}</p>
-            <p>contentURI: {nftList[i].contentURI.toString()}</p>
-            <p>img: {imgList[i]}</p>
-            <p>OpenSea link {"https://testnets.opensea.io/assets/mumbai/0xA4E1d8FE768d471B048F9d73ff90ED8fcCC03643/"+nftList[i].tokenId.toString()}</p>
-            <p>contractName: {nftList[i].contractName.toString()}</p>
-            <p>description: {nftList[i].description.toString()}</p>
-            <p>ercType: {nftList[i].ercType.toString()}</p>
-            <p>name: {nftList[i].name.toString()}</p>
-            <p>tokenId: {nftList[i].tokenId.toString()}</p>
-            </div>   
-        ): <p></p>}
-
+        <h2>All NFT's</h2>
+        <div className='nfts'>
+          {nftList.length>0?
+          nftList.map((object, i) => 
+              <div className='nft-container'>
+                <img src='/livepeer.png'/>
+                <div className='nft-inner-content'>
+                  <h3>NFT ID: #{i+1}</h3>
+                  <p>Name: {nftList[i].name.toString()}</p>
+                  <p>collectionName: {nftList[i].collectionName.toString()}</p>
+                  <a href={nftList[i].contentURI.toString()}>contentURI</a>
+                  <p>img: {imgList[i]}</p>
+                  <a href={"https://testnets.opensea.io/assets/mumbai/0xA4E1d8FE768d471B048F9d73ff90ED8fcCC03643/"+nftList[i].tokenId.toString()}>OpenSea</a>
+                  <p>contractName: {nftList[i].contractName.toString()}</p>
+                  <p>description: {nftList[i].description.toString()}</p>
+                  <p>ercType: {nftList[i].ercType.toString()}</p>
+                  <p>name: {nftList[i].name.toString()}</p>
+                  <p>tokenId: {nftList[i].tokenId.toString()}</p>
+                </div>
+              </div>   
+            ):<p></p>}
+        </div>
       </div>
 
         <div>
