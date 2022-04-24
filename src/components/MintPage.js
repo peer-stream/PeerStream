@@ -30,10 +30,10 @@ const MintPage = (props) => {
 
       }
       connectToWallet();
-        ping().then(res => setpingStatus(res.data.ping=="pong"?"True":"False"));
+        ping().then(res => setpingStatus(res.data.ping==="pong"?"True":"False"));
    
 try {
-  if(web3.account && nftLenght==0){
+  if(web3.account && nftLenght===0){
     console.log("wallet adress");
     console.log(web3.account)
 
