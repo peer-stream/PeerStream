@@ -22,16 +22,22 @@ const MintPage = (props) => {
       // web3.account -> wallet address
     }
 
+
+
     useEffect(() => {
+      if(web3.account == null){
+        connectToWallet();
+
+      }
       connectToWallet();
         ping().then(res => setpingStatus(res.data.ping=="pong"?"True":"False"));
    
 try {
-  if(walletAddress && nftLenght==0){
+  if(web3.accoun && nftLenght==0){
     console.log("wallet adress");
-    console.log(walletAddress)
+    console.log(web3.accoun)
 
-      getUsersNfts(walletAddress,contract,[80001]).then((res) =>{
+      getUsersNfts(web3.accoun,contract,[80001]).then((res) =>{
   
      if(res.data.nfts){
       setNftLenght(res.data.nfts.length);
