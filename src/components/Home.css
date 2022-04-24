@@ -1,15 +1,14 @@
 .home{
     display: flex;
     flex-direction: row;
-    height: 100vh;
+    height: 80vh;
+    align-items: center;
+    justify-content: center;
 }
 
 h1 {
     font-weight: 600;
     font-size: 4em;
-    height: 1rem;
-    width: 50%;
-    text-align: right;
     background-color: red;
     background-image: linear-gradient(27deg, #743ad5, #3aa6d5);
     background-size: 100%;
@@ -20,12 +19,15 @@ h1 {
     -moz-text-fill-color: transparent;
 }
 
+h1.home-style {
+    font-size: 5em;
+}
+
 .logo{
     width: 3em;
 }
 
 .big-logo{
-    max-width: 50%;
-    max-height: 80%;
-    padding: 50px;
+    width: 21%;
+    padding: 40px;
 }
