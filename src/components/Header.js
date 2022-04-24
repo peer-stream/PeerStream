@@ -65,15 +65,6 @@ const Header = (props) => {
           <Link to="/"><img className='logo' src='/peer_stream.png' alt="Peer Stream logo" /></Link>
         </div>
         <div className="right-side">
-        {/** 
-         * 
-          <Route path="/" element={<Home />} />
-          <Route path="/streams" element={<StreamList/>}/>
-          <Route path="/mint" element={<MintPage/>}/>
-          <Route path='/go-live' element={<StreamCreation/>}/>
-          <Route path='/watch/:id' element={<StreamCreation/>}/>
-        */}
-
         <Link className='link' to="/go-live">Go Live</Link>
         <Link className='link' to="/streams">Streams</Link>
         <Link className='link' to="/mint">Mint Video NFT</Link>

@@ -6,6 +6,7 @@ import Header from './components/Header';
 import Home from './components/Home';
 import StreamList from './components/StreamList';
 import StreamCreation from './components/StreamCreation';
+import Stream from './components/Stream';
 import MintPage from './components/MintPage';
 
 import {
@@ -25,7 +26,7 @@ function App() {
             <Route path="/streams" element={<StreamList/>}/>
             <Route path="/mint" element={<MintPage/>}/>
             <Route path='/go-live' element={<StreamCreation/>}/>
-            <Route path='/watch/:id' element={<StreamCreation/>}/>
+            <Route path='/watch/:id' element={<Stream/>}/>
           </Routes>
         </Router>
       </Web3Provider>

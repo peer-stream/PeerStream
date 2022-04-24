@@ -22,6 +22,9 @@
     "react-router-dom": "^6.3.0",
     "react-scripts": "4.0.1",
     "urql": "^2.2.0",
+    "video.js": "^7.18.1",
+    "videojs": "^1.0.0",
+    "videojs-react-enhanced": "^0.3.1",
     "web3modal": "^1.9.7"
   },
   "scripts": {
