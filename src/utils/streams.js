@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 
-export const getStreams = async(token) => {
+const getStreams = async(token) => {
     const response = await axios.get('https://ethamsterdam.herokuapp.com/streams/', {
       headers: {
           'Authorization': 'Bearer '+ token,
@@ -10,3 +10,5 @@ export const getStreams = async(token) => {
     });
     return response.data;
   }
+
+export default getStreams;

@@ -3,35 +3,36 @@
  * stream titles
  */
  import { useWeb3 } from '../utils/web3ModalContext';
- import { useEffect } from 'react';
- import {getStreams} from "../utils/streams";
+ import { useEffect, useState } from 'react';
+import getStreams from '../utils/streams';
 const StreamList = (props) => {
-    const web3 = useWeb3();
+  const [data, setData] = useState();
 
-
-    const connectToWallet = async () => {
+  const web3 = useWeb3();
+  const connectToWallet = async () => {
       await web3.connect();
-      // web3.account -> wallet address
-    }
+  }
+  const getData = async () => {
+    const token = localStorage.getItem('access_token');
+    const data = await getStreams(token);
+    console.log(data);
+    setData(data);
+  }
 
-
-
-    useEffect(() => {
+  useEffect(() => {
       if(web3.account == null){
         connectToWallet();
-
       }
       connectToWallet();
-      console.log(getStreams());
-
-
-      });
+      getData();
+  },[]);
 
 
   
-    return (
-        <div>
-        </div>)
+  return (
+      <div>
+        { data.map((d) => <p>{d}</p>) }
+      </div>)
 }
 
 export default StreamList;
